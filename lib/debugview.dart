@@ -6,7 +6,9 @@ import 'package:debugview/dio.extension.dart';
 import 'package:debugview/mock.dart';
 import 'package:debugview/utils/prefs.dart';
 import 'package:debugview/widgets/button.dart';
+import 'package:debugview/widgets/mock_switch.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,10 +24,20 @@ class DebugView {
 
   Alice get alice => _aliceInstance;
 
-  final mockList = <Mock>[];
+  var mockList = <Mock>[];
 
-  init() async {
+  init({
+    List<DebugViewMock>? mockList,
+    GlobalKey<NavigatorState>? navigatorKey,
+  }) async {
     await Prefs().init();
+
+    if (mockList != null) {
+      this.mockList = mockList.map((e) => e.toMock()).toList();
+    }
+    if (navigatorKey != null) {
+      DebugView().alice.setNavigatorKey(navigatorKey);
+    }
   }
 }
 
@@ -46,7 +58,18 @@ class DebugViewWidget extends StatefulWidget {
 }
 
 class _DebugViewWidgetState extends State<DebugViewWidget> {
+  List<Mock> mockList = DebugView().mockList;
+
+  buildMockSwitchWidgets() {
+    return mockList.map(
+      (mock) => MockSwitchWidget(
+        mock: mock,
+      ),
+    );
+  }
+
   showDebugView() {
+    print("[DebugView] - showDebugView");
     showBottomSheet(
       context: context,
       elevation: 30,
@@ -67,6 +90,20 @@ class _DebugViewWidgetState extends State<DebugViewWidget> {
             const SizedBox(
               height: 16,
             ),
+            Row(
+              children: [
+                const Spacer(),
+                IconButton(
+                  icon: const Icon(CupertinoIcons.xmark),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 16,
+            ),
             SizedBox(
               width: double.infinity,
               child: ButtonWidget(
@@ -79,6 +116,8 @@ class _DebugViewWidgetState extends State<DebugViewWidget> {
             const Padding(padding: EdgeInsets.symmetric(vertical: 8)),
             if (widget.debugViewContent != null)
               SizedBox(width: double.infinity, child: widget.debugViewContent!),
+            const Padding(padding: EdgeInsets.symmetric(vertical: 8)),
+            ...buildMockSwitchWidgets(),
           ],
         ),
       ),
@@ -105,21 +144,27 @@ class _DebugViewWidgetState extends State<DebugViewWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final debugKeySet = LogicalKeySet(
+      LogicalKeyboardKey.altLeft,
+      LogicalKeyboardKey.controlLeft,
+      LogicalKeyboardKey.escape,
+    );
+
     return kDebugMode && kIsWeb
-        ? RawKeyboardListener(
-            focusNode: FocusNode(),
+        ? FocusableActionDetector(
             autofocus: true,
-            onKey: (event) {
-              if (event is RawKeyDownEvent &&
-                  event.isAltPressed &&
-                  event.isControlPressed &&
-                  event.isKeyPressed(LogicalKeyboardKey.escape)) {
-                print("[DebugView] - onShortcutPressed");
-                showDebugView();
-              }
+            shortcuts: {
+              debugKeySet: DebugIntent(),
+            },
+            actions: {
+              DebugIntent: CallbackAction(onInvoke: (e) => {
+                showDebugView()
+              }),
             },
             child: widget.child,
           )
         : widget.child;
   }
 }
+
+class DebugIntent extends Intent {}
