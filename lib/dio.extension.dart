@@ -22,9 +22,8 @@ extension Interceptor on Dio {
             options.headers.remove(mockHeaderKey);
             if (mock.isActive) {
               final data = await rootBundle.loadString(mock.mockAssetPath);
-              Map<String, dynamic> map = Map.castFrom(jsonDecode(data));
               return handler.resolve(
-                Response(requestOptions: options, data: map),
+                Response(requestOptions: options, data: jsonDecode(data)),
               );
             }
           }

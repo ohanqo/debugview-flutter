@@ -69,8 +69,6 @@ class DebugView {
   }
 
   navigateToDebugView() {
-    print(navigatorKey);
-    print(navigatorKey?.currentState?.overlay?.context);
     final context = navigatorKey?.currentState?.overlay?.context;
     if (context == null) {
       debugPrint(
