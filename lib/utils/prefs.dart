@@ -13,8 +13,8 @@ class Prefs {
     prefs = await SharedPreferences.getInstance();
   }
 
-  bool getBool(String id) {
-    return prefs.getBool(id) ?? false;
+  bool? getBool(String id) {
+    return prefs.getBool(id);
   }
 
   setBool({required String id, required bool value}) async {

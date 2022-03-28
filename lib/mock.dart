@@ -11,45 +11,46 @@ class Mock {
     required String label,
     required String mockId,
     required String mockAssetPath,
-    bool isActive = false,
+    bool isActiveByDefault = false,
   }) {
     final mock = Mock.init(
       label,
       mockId,
       mockAssetPath,
     );
-    mock.isActive = isActive;
+    mock.isActive ??= isActiveByDefault;
     return mock;
   }
 
-  bool get isActive {
+  bool? get isActive {
     return Prefs().getBool(mockId);
   }
 
-  set isActive(bool _isActive) {
-    Prefs().setBool(id: mockId, value: _isActive);
+  set isActive(bool? _isActive) {
+    if (_isActive != null) {
+      Prefs().setBool(id: mockId, value: _isActive);
+    }
   }
-}
 
 class DebugViewMock {
   const DebugViewMock({
     required this.label,
     required this.mockId,
     required this.mockAssetPath,
-    this.isActive = false,
+    this.isActiveByDefault = false,
   });
 
   final String label;
   final String mockId;
   final String mockAssetPath;
-  final bool isActive;
+  final bool isActiveByDefault;
 
   Mock toMock() {
     return Mock.factory(
       label: label,
       mockId: mockId,
       mockAssetPath: mockAssetPath,
-      isActive: isActive,
+      isActiveByDefault: isActiveByDefault,
     );
   }
 }

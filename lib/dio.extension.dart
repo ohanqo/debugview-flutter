@@ -19,8 +19,7 @@ extension Interceptor on Dio {
             final mock = DebugView()
                 .mockList
                 .firstWhere((element) => element.mockId == mockId);
-            options.headers.remove(mockHeaderKey);
-            if (mock.isActive) {
+            if (mock.isActive == true) {
               final data = await rootBundle.loadString(mock.mockAssetPath);
               return handler.resolve(
                 Response(requestOptions: options, data: jsonDecode(data)),
