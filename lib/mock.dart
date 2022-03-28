@@ -32,6 +32,15 @@ class Mock {
     }
   }
 
+  int get throttle {
+    return Prefs().getInt("$mockId-throttle");
+  }
+
+  set throttle(int value) {
+    Prefs().setInt(id: "$mockId-throttle", value: value);
+  }
+}
+
 class DebugViewMock {
   const DebugViewMock({
     required this.label,

@@ -20,4 +20,10 @@ class Prefs {
   setBool({required String id, required bool value}) async {
     await prefs.setBool(id, value);
   }
+
+  int getInt(String id) => prefs.getInt(id) ?? 0;
+
+  setInt({required String id, required int value}) async {
+    await prefs.setInt(id, value);
+  }
 }

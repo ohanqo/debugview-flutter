@@ -1,34 +1,32 @@
 import 'package:flutter/material.dart';
 
-class ButtonWidget extends StatelessWidget {
-  const ButtonWidget({
+class DebugButtonWidget extends StatelessWidget {
+  const DebugButtonWidget({
     Key? key,
     required this.label,
     required this.onPressed,
   }) : super(key: key);
 
-  final Function onPressed;
+  final VoidCallback onPressed;
   final String label;
 
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-      color: Colors.white,
-      textColor: Colors.redAccent,
+      color: Colors.transparent,
+      textColor: Colors.white,
       padding: const EdgeInsets.symmetric(
         vertical: 16,
         horizontal: 32,
       ),
       elevation: 0,
       shape: const RoundedRectangleBorder(
-        side: BorderSide(width: 1, color: Colors.redAccent),
+        side: BorderSide(width: 1, color: Colors.white),
         borderRadius: BorderRadius.all(
           Radius.circular(8.0),
         ),
       ),
-      onPressed: () {
-        onPressed();
-      },
+      onPressed: onPressed,
       child: Text(label),
     );
   }

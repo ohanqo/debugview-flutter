@@ -13,11 +13,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class DebugView {
-  static final DebugView _singleton = DebugView._internal();
+  DebugView._privateConstructor();
 
-  factory DebugView() => _singleton;
-
-  DebugView._internal();
+  static final DebugView instance = DebugView._privateConstructor();
 
   final Alice _aliceInstance = Alice(showNotification: false);
 
@@ -25,19 +23,16 @@ class DebugView {
 
   var mockList = <Mock>[];
 
-  bool showNotification = true;
-
   bool _isDebugViewOpened = false;
 
   GlobalKey<NavigatorState>? navigatorKey;
 
-  Widget? debugViewContent;
+  Widget? _debugViewContent;
 
   init({
     List<DebugViewMock>? mockList,
     GlobalKey<NavigatorState>? navigatorKey,
     Dio? dioInstance,
-    bool? showNotification,
   }) async {
     await Prefs().init();
 
@@ -47,9 +42,6 @@ class DebugView {
     if (navigatorKey != null) {
       this.navigatorKey = navigatorKey;
       alice.setNavigatorKey(navigatorKey);
-    }
-    if (showNotification != null) {
-      this.showNotification = showNotification;
     }
 
     dioInstance?.addDebugViewInterceptors();
@@ -65,7 +57,7 @@ class DebugView {
   }
 
   setDebugViewContent(Widget content) {
-    debugViewContent = content;
+    _debugViewContent = content;
   }
 
   navigateToDebugView() {
@@ -81,10 +73,9 @@ class DebugView {
       Navigator.push<void>(
         context,
         MaterialPageRoute(
-          builder: (context) =>
-              DebugViewPage(
-                debugViewContent: debugViewContent,
-              ),
+          builder: (context) => DebugViewPage(
+            debugViewContent: _debugViewContent,
+          ),
         ),
       ).then((onValue) => _isDebugViewOpened = false);
     }

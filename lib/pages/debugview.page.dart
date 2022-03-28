@@ -1,7 +1,7 @@
 import 'package:debugview/debugview.dart';
 import 'package:debugview/mock.dart';
 import 'package:debugview/widgets/button.dart';
-import 'package:debugview/widgets/mock_switch.dart';
+import 'package:debugview/widgets/mock.dart';
 import 'package:flutter/material.dart';
 
 class DebugViewPage extends StatefulWidget {
@@ -14,14 +14,18 @@ class DebugViewPage extends StatefulWidget {
 }
 
 class _DebugViewPageState extends State<DebugViewPage> {
-  List<Mock> mockList = DebugView().mockList;
+  List<Mock> mockList = DebugView.instance.mockList;
 
   buildMockSwitchWidgets() {
     return mockList.map(
-      (mock) => MockSwitchWidget(
+      (mock) => DebugMockWidget(
         mock: mock,
       ),
     );
+  }
+
+  openNetworkInterceptor() {
+    DebugView.instance.alice.showInspector();
   }
 
   @override
@@ -38,11 +42,9 @@ class _DebugViewPageState extends State<DebugViewPage> {
             ),
             SizedBox(
               width: double.infinity,
-              child: ButtonWidget(
-                label: "Network Viewer (Alice)",
-                onPressed: () {
-                  DebugView().alice.showInspector();
-                },
+              child: DebugButtonWidget(
+                label: "Network Viewer",
+                onPressed: openNetworkInterceptor,
               ),
             ),
             const SizedBox(
