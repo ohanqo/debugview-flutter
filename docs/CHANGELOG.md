@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/ohanqo/debugview-flutter/compare/v1.0.0...v1.1.0) (2022-03-29)
+
+
+### Features
+
+* **mock:** override response type option ([a2a1a5a](https://github.com/ohanqo/debugview-flutter/commit/a2a1a5a3daee9a8bb23d123f337659e0da808066))
+
 # 1.0.0 (2022-03-28)
 
 
