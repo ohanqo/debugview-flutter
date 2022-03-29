@@ -1,3 +1,4 @@
+import 'package:debugview/response.dart';
 import 'package:debugview/utils/prefs.dart';
 
 class Mock {
@@ -38,6 +39,15 @@ class Mock {
 
   set throttle(int value) {
     Prefs().setInt(id: "$mockId-throttle", value: value);
+  }
+
+  String get response {
+    return Prefs().getString("$mockId-response") ??
+        DebugResponseLabel.STATUS_200.name;
+  }
+
+  set response(String value) {
+    Prefs().setString(id: "$mockId-response", value: value);
   }
 }
 

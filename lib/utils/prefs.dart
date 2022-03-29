@@ -26,4 +26,10 @@ class Prefs {
   setInt({required String id, required int value}) async {
     await prefs.setInt(id, value);
   }
+
+  String? getString(String id) => prefs.getString(id);
+
+  setString({required String id, required String value}) async {
+    await prefs.setString(id, value);
+  }
 }

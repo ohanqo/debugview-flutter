@@ -1,3 +1,4 @@
+import 'package:debugview/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class DebugButtonWidget extends StatelessWidget {
@@ -14,20 +15,24 @@ class DebugButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialButton(
       color: Colors.transparent,
-      textColor: Colors.white,
+      textColor: mainColor,
       padding: const EdgeInsets.symmetric(
         vertical: 16,
         horizontal: 32,
       ),
       elevation: 0,
       shape: const RoundedRectangleBorder(
-        side: BorderSide(width: 1, color: Colors.white),
+        side: BorderSide(width: 1, color: mainColor),
         borderRadius: BorderRadius.all(
           Radius.circular(8.0),
         ),
       ),
       onPressed: onPressed,
-      child: Text(label),
+      child: Text(
+        label,
+        style: const TextStyle(color: mainColor),
+        overflow: TextOverflow.ellipsis,
+      ),
     );
   }
 }

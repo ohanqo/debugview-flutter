@@ -34,30 +34,32 @@ class _DebugViewPageState extends State<DebugViewPage> {
       appBar: AppBar(title: const Text("Debug")),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(
-              height: 16,
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: DebugButtonWidget(
-                label: "Network Viewer",
-                onPressed: openNetworkInterceptor,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(
+                height: 16,
               ),
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            if (widget.debugViewContent != null)
               SizedBox(
                 width: double.infinity,
-                child: widget.debugViewContent!,
+                child: DebugButtonWidget(
+                  label: "Network Viewer",
+                  onPressed: openNetworkInterceptor,
+                ),
               ),
-            const Padding(padding: EdgeInsets.symmetric(vertical: 8)),
-            ...buildMockSwitchWidgets(),
-          ],
+              const SizedBox(
+                height: 16,
+              ),
+              if (widget.debugViewContent != null)
+                SizedBox(
+                  width: double.infinity,
+                  child: widget.debugViewContent!,
+                ),
+              const Padding(padding: EdgeInsets.symmetric(vertical: 8)),
+              ...buildMockSwitchWidgets(),
+            ],
+          ),
         ),
       ),
     );
