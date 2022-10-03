@@ -10,14 +10,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  alice: ^0.2.5
-  dio: ^4.0.4
+  dio: ^4.0.6
   shared_preferences: ^2.0.13
+  alice_lightweight: ^3.1.0
+  shake: ^2.1.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^1.0.0
+  flutter_lints: ^2.0.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

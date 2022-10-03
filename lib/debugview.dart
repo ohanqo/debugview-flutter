@@ -1,7 +1,6 @@
 library debugview;
 
-import 'package:alice/alice.dart';
-import 'package:alice/utils/shake_detector.dart';
+import 'package:alice_lightweight/alice.dart';
 import 'package:debugview/dio.extension.dart';
 import 'package:debugview/mock.dart';
 import 'package:debugview/pages/debugview.page.dart';
@@ -11,13 +10,14 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shake/shake.dart';
 
 class DebugView {
   DebugView._privateConstructor();
 
   static final DebugView instance = DebugView._privateConstructor();
 
-  final Alice _aliceInstance = Alice(showNotification: false);
+  final Alice _aliceInstance = Alice();
 
   Alice get alice => _aliceInstance;
 
