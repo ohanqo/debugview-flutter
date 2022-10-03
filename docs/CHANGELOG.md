@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/ohanqo/debugview-flutter/compare/v1.1.0...v1.1.1) (2022-10-03)
+
+
+### Bug Fixes
+
+* use lightweight alice dependency  version ([a23efce](https://github.com/ohanqo/debugview-flutter/commit/a23efce5f5da91f92a8b15e4feeaa26a1039af67))
+
 # [1.1.0](https://github.com/ohanqo/debugview-flutter/compare/v1.0.0...v1.1.0) (2022-03-29)
 
 
