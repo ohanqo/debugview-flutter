@@ -10,6 +10,13 @@ const testMock = DebugViewMock(
   isActiveByDefault: true,
 );
 
+const test2Mock = DebugViewMock(
+  label: "Test 2 Mock",
+  mockId: "test2-mock",
+  mockAssetPath: "test/data/test.json",
+  isActiveByDefault: true,
+);
+
 @JsonSerializable()
 class TestMock {
   final bool mock;

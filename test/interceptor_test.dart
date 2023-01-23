@@ -31,6 +31,10 @@ void main() async {
     dioInstance: dio,
   );
 
+  setUp(() async {
+    await SharedPreferences.getInstance().then((value) => value.clear());
+  });
+
   test("should make real call", () async {
     final mockTest = DebugView.instance.mockList.first;
     await Future(() => mockTest.isActive = false);
@@ -43,7 +47,7 @@ void main() async {
     expect(response.data, equals(result));
   });
 
-  test("should return mocked response", () async {
+  test("should mock response", () async {
     final mockTest = DebugView.instance.mockList.first;
     await Future(() {
       mockTest.isActive = true;
@@ -60,7 +64,7 @@ void main() async {
     expect(data.mock, true);
   });
 
-  test("should return mocked error", () async {
+  test("should mock error", () async {
     final mockTest = DebugView.instance.mockList.first;
     await Future(() {
       mockTest.isActive = true;
@@ -78,7 +82,7 @@ void main() async {
     expect(response.statusCode, 403);
   });
 
-  test("should return mocked reponse with throttle", () async {
+  test("should mock reponse with throttle", () async {
     final mockTest = DebugView.instance.mockList.first;
     await Future(() {
       mockTest.isActive = true;
@@ -102,7 +106,7 @@ void main() async {
     expect(data.mock, true);
   });
 
-  test("should return mocked error with throttle", () async {
+  test("should mock error with throttle", () async {
     final mockTest = DebugView.instance.mockList.first;
     await Future(() {
       mockTest.isActive = true;

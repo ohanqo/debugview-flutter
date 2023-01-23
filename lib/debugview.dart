@@ -90,4 +90,20 @@ class DebugView {
       navigateToDebugView();
     }
   }
+
+  void enableMocks([List<String>? ids]) {
+    for (var element in mockList) {
+      if (ids?.contains(element.mockId) ?? ids == null) {
+        element.isActive = true;
+      }
+    }
+  }
+
+  void disableMocks([List<String>? ids]) {
+    for (var element in mockList) {
+      if (ids?.contains(element.mockId) ?? ids == null) {
+        element.isActive = false;
+      }
+    }
+  }
 }
