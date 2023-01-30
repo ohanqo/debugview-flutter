@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/ohanqo/debugview-flutter/compare/v1.1.1...v1.2.0) (2023-01-30)
+
+
+### Features
+
+* add enableMocks and disableMocks methods ([9ef8381](https://github.com/ohanqo/debugview-flutter/commit/9ef8381480ee1703fcbc628a5a7b0993f3f660ae))
+
 ## [1.1.1](https://github.com/ohanqo/debugview-flutter/compare/v1.1.0...v1.1.1) (2022-10-03)
 
 
