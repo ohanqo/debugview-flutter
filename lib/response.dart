@@ -32,9 +32,9 @@ class DebugResponse {
   final DebugResponseLabel label;
   final bool isError;
   final int? status;
-  final DioErrorType? dioErrorType;
+  final DioExceptionType? dioErrorType;
 
-  DioError getDioError(RequestOptions options) {
+  DioException getDioError(RequestOptions options) {
     if (!isError) {
       throw Exception("The response need to be an error…");
     }
@@ -50,6 +50,10 @@ class DebugResponse {
 
     options.responseType = ResponseType.json;
 
-    return DioError(response: response, requestOptions: options, type: dioErrorType!);
+    return DioException(
+      response: response,
+      requestOptions: options,
+      type: dioErrorType!,
+    );
   }
 }
