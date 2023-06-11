@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/ohanqo/debugview-flutter/compare/v1.2.0...v1.2.1) (2023-06-11)
+
+
+### Bug Fixes
+
+* **deps:** update dependencies ([06ff64b](https://github.com/ohanqo/debugview-flutter/commit/06ff64bab497a161112cb28138f67ff54f6a6f83))
+
 # [1.2.0](https://github.com/ohanqo/debugview-flutter/compare/v1.1.1...v1.2.0) (2023-01-30)
 
 
